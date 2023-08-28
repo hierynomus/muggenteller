@@ -1,0 +1,47 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.button-container {
+  margin-bottom: 10px;
+}
+
+button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:disabled {
+  background-color: #bcbcbc;
+  cursor: not-allowed;
+}
+
+.custom-file-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
+}
+
+.custom-file-upload input[type='file'] {
+  display: none;
+}
+
+.counter {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.canvas {
+  border: 1px solid #ccc;
+}
