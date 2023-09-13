@@ -42,13 +42,15 @@ function App() {
 
     // Create a new canvas element for the combined image with the count
     const combinedCanvas = document.createElement('canvas');
-    combinedCanvas.width = container.offsetWidth;
-    combinedCanvas.height = container.offsetHeight;
+    const containerWidth = container.scrollWidth;
+    const containerHeight = container.scrollHeight;
+    combinedCanvas.width = containerWidth;
+    combinedCanvas.height = containerHeight;
     const ctx = combinedCanvas.getContext('2d');
 
     // Draw the main container (image and dots) on the new canvas
-    html2canvas(container).then((mainCanvas) => {
-      ctx.drawImage(mainCanvas, 0, 0);
+    html2canvas(container, { width: containerWidth, height: containerHeight }).then((mainCanvas) => {
+      ctx.drawImage(mainCanvas, 0, 0, containerWidth, containerHeight);
 
       // Add the count in the top-right corner
       ctx.fillStyle = 'white';
@@ -273,7 +275,7 @@ function App() {
         </button>
         <button onClick={handleSave}>Save Dots</button>
         <label htmlFor="load-input" className="custom-file-upload">
-          Load JSON
+          Load Dots
           <input
             type="file"
             id="load-input"
@@ -282,17 +284,19 @@ function App() {
           />
         </label>
       </div>
+      <div className="button-container">
+        <label htmlFor="image-input" className="custom-file-upload">
+          Load Image
+          <input
+            type="file"
+            id="image-input"
+            accept=".jpg, .jpeg, .png"
+            onChange={handleOpenImage}
+          />
+        </label>
+        <button onClick={saveImage}>Save Image</button>
+      </div>
       <p className="counter">Counter: {dots.length}</p>
-      <label htmlFor="image-input" className="custom-file-upload">
-        Load Image
-        <input
-          type="file"
-          id="image-input"
-          accept=".jpg, .jpeg, .png"
-          onChange={handleOpenImage}
-        />
-      </label>
-      <button onClick={saveImage}>Save Image</button>
 
       <div className="canvas-container" id="combined-container">
         <canvas
