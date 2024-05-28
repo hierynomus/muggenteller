@@ -82,7 +82,7 @@ function App() {
       // Create a link element to download the image
       const link = document.createElement('a');
       link.href = dataURL;
-      link.download = imageName.split('.')[0] + '_out.jpg';
+      link.download = imageName.replace(/\.[^/.]+$/, '_out.jpg');
 
       // Trigger a click event on the link to initiate the download
       link.click();
@@ -96,7 +96,8 @@ function App() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = imageName.split('.')[0] + '.json';
+    // Remove the last part of the image name (extension) and add .json, filename can contain multiple dots
+    link.download = imageName.replace(/\.[^/.]+$/, '.json');
     link.click();
   };
 
